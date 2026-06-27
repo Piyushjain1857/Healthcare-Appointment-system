@@ -17,8 +17,14 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
+  // Close menu on route change
   useEffect(() => { setMenuOpen(false); }, [location.pathname]);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
 
   const isActive = (path) => location.pathname === path;
 
@@ -53,13 +59,17 @@ const Navbar = () => {
           <div className="nav-actions">
             {isAuthenticated ? (
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <Link to="/profile" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 14px', background: 'var(--primary-light)', borderRadius: 'var(--r-full)', color: 'var(--primary-dark)', fontWeight: '700', fontSize: '13px' }}>
+                <Link to="/profile" style={{
+                  display: 'flex', alignItems: 'center', gap: '8px',
+                  padding: '6px 14px', background: 'var(--primary-light)',
+                  borderRadius: 'var(--r-full)', color: 'var(--primary-dark)',
+                  fontWeight: '700', fontSize: '13px', fontFamily: 'Inter, sans-serif',
+                }}>
                   <div style={{
-                    width: '28px', height: '28px',
-                    background: 'var(--grad-blue)',
+                    width: '28px', height: '28px', background: 'var(--grad-blue)',
                     color: 'white', borderRadius: '50%',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontWeight: '800', fontSize: '13px', flexShrink: 0
+                    fontWeight: '800', fontSize: '13px', flexShrink: 0,
                   }}>
                     {user?.name?.[0]?.toUpperCase()}
                   </div>
@@ -85,7 +95,7 @@ const Navbar = () => {
           <button
             className={`nav-toggle${menuOpen ? ' open' : ''}`}
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
+            aria-label="Toggle navigation menu"
             aria-expanded={menuOpen}
           >
             <span /><span /><span />
@@ -93,37 +103,47 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
-      <div className={`mobile-menu${menuOpen ? ' open' : ''}`}>
-        <Link to="/" className="nav-link">🏠 Home</Link>
-        <Link to="/doctors">🔍 Find Doctors</Link>
-        <Link to="/about">ℹ️ About</Link>
-        {isAuthenticated && <Link to="/dashboard">📊 Dashboard</Link>}
-        {isAuthenticated && <Link to="/profile">👤 My Profile</Link>}
-        <div className="mobile-menu-divider" />
-        {isAuthenticated ? (
-          <button onClick={handleLogout} style={{ color: 'var(--danger)', fontWeight: '700' }}>
-            🚪 Logout
-          </button>
-        ) : (
-          <>
-            <Link to="/login" style={{ color: 'var(--primary)', fontWeight: '700' }}>Login</Link>
-            <Link
-              to="/register"
-              style={{
-                background: 'var(--grad-blue)',
-                color: 'white',
-                borderRadius: 'var(--r-md)',
-                fontWeight: '700',
-                textAlign: 'center',
-                marginTop: '4px',
-                padding: '14px 18px',
-              }}
-            >
-              Get Started — Free
-            </Link>
-          </>
-        )}
+      {/* Mobile Overlay */}
+      {menuOpen && (
+        <div
+          onClick={() => setMenuOpen(false)}
+          style={{
+            position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)',
+            zIndex: 998, backdropFilter: 'blur(2px)',
+          }}
+        />
+      )}
+
+      {/* Mobile Drawer */}
+      <div className={`mobile-menu${menuOpen ? ' open' : ''}`} style={{ display: 'flex' }}>
+        <div style={{ padding: '8px 0' }}>
+          <Link to="/">🏠 Home</Link>
+          <Link to="/doctors">🔍 Find Doctors</Link>
+          <Link to="/about">ℹ️ About</Link>
+          {isAuthenticated && <Link to="/dashboard">📊 Dashboard</Link>}
+          {isAuthenticated && <Link to="/profile">👤 My Profile</Link>}
+          <div className="mobile-menu-divider" />
+          {isAuthenticated ? (
+            <button onClick={handleLogout} style={{ color: 'var(--danger)', fontWeight: '700', width: '100%', textAlign: 'left', padding: '14px 18px' }}>
+              🚪 Logout
+            </button>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '0 4px' }}>
+              <Link to="/login" style={{ padding: '14px 18px', color: 'var(--primary)', fontWeight: '700', display: 'block', borderRadius: 'var(--r-md)' }}>Login</Link>
+              <Link
+                to="/register"
+                style={{
+                  background: 'var(--grad-blue)', color: 'white',
+                  borderRadius: 'var(--r-md)', fontWeight: '700',
+                  textAlign: 'center', padding: '14px 18px', display: 'block',
+                  boxShadow: 'var(--shadow-primary)',
+                }}
+              >
+                Get Started — Free 🚀
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

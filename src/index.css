@@ -1289,121 +1289,201 @@ input, select, textarea { font-family: inherit; }
 
 /* ─── Responsive ─── */
 
-/* Tablet: ≤1024px */
+/* ══════════════════════════════════════
+   RESPONSIVE — TABLET ≤1024px
+══════════════════════════════════════ */
 @media (max-width: 1024px) {
   :root {
     --section-py: 72px;
     --container-px: 20px;
   }
 
+  /* Hero — tablet: stack columns, center text */
   .hero-grid {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 40px;
-    padding: 60px 0;
+    gap: 36px;
+    padding: 56px 0;
   }
-
-  .hero-subtitle { margin: 0 auto 36px; }
-
+  .hero-subtitle { margin: 0 auto 32px; }
   .hero-tags { justify-content: center; }
-
-  .hero-search { max-width: 560px; margin: 0 auto 24px; }
-
+  .hero-search { max-width: 560px; margin: 0 auto 20px; }
   .hero-visual { display: none; }
 
+  /* Grids */
   .specialty-grid { grid-template-columns: repeat(4, 1fr); }
-
   .feature-grid { grid-template-columns: repeat(2, 1fr); }
+  .doctors-grid { grid-template-columns: repeat(2, 1fr); }
 
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
-
+  /* Stats */
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
-
   .stat-item:nth-child(2) { border-right: none; }
   .stat-item:nth-child(3) { border-top: 1px solid var(--border); }
   .stat-item:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
 
-  .auth-wrapper { grid-template-columns: 1fr; }
-  .auth-left { display: none; }
-  .auth-right { padding: 40px 24px; }
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
 
-  .cta-section { padding: 60px 40px; }
+  /* CTA */
+  .cta-section { padding: 56px 36px; }
+
+  /* About vision card */
+  .about-vision-grid { grid-template-columns: 1fr !important; }
 }
 
-/* Mobile: ≤768px */
+/* ══════════════════════════════════════
+   RESPONSIVE — MOBILE ≤768px
+══════════════════════════════════════ */
 @media (max-width: 768px) {
   :root {
-    --section-py: 56px;
-    --nav-h: 68px;
+    --section-py: 52px;
+    --nav-h: 64px;
     --container-px: 16px;
   }
 
-  /* Navbar */
+  /* ── Navbar ── */
   .nav-links { display: none; }
   .nav-actions { display: none; }
   .nav-toggle { display: flex; }
-  .mobile-menu { display: flex; }
 
-  /* Hero */
-  .hero-title { font-size: 36px; }
-  .hero-badge { font-size: 12px; }
+  /* ── Hero ── */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 28px;
+    padding: 48px 0;
+  }
+  .hero-visual { display: none; }
+  .hero-title { font-size: clamp(30px, 8vw, 40px); }
+  .hero-badge { font-size: 11px; padding: 6px 14px; }
+  .hero-subtitle { font-size: 15px; margin: 0 auto 28px; }
+  .hero-tags { justify-content: center; flex-wrap: wrap; }
 
   .hero-search {
     flex-direction: column;
     border-radius: var(--r-lg);
-    padding: 12px;
+    padding: 10px;
+    gap: 6px;
+    margin: 0 auto 18px;
+  }
+  .hero-search input { padding: 12px 14px; width: 100%; }
+  .hero-search .btn { width: 100%; justify-content: center; padding: 13px; }
+
+  /* ── Stats ── */
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat-item {
+    padding: 24px 12px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-item:nth-child(odd) { border-right: 1px solid var(--border); }
+  .stat-item:nth-child(3),
+  .stat-item:nth-child(4) { border-bottom: none; }
+  .stat-num { font-size: 26px; }
+  .stat-icon { font-size: 22px; }
+
+  /* ── Specialties ── */
+  .specialty-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .specialty-card { padding: 18px 10px; border-radius: var(--r-lg); }
+  .specialty-icon { font-size: 28px; margin-bottom: 8px; }
+  .specialty-label { font-size: 12px; }
+
+  /* ── Features ── */
+  .feature-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .feature-card { padding: 24px 18px; }
+  .feature-icon { width: 48px; height: 48px; font-size: 22px; margin-bottom: 16px; }
+  .feature-card h3 { font-size: 15px; }
+
+  /* ── Doctors ── */
+  .doctors-grid { grid-template-columns: 1fr; }
+
+  /* ── Section Headers ── */
+  .section-header { margin-bottom: 36px; }
+  .section-title { font-size: clamp(22px, 6vw, 32px); }
+  .section-subtitle { font-size: 14px; }
+
+  /* ── CTA ── */
+  .cta-section { padding: 44px 20px; border-radius: var(--r-xl); }
+
+  /* ── Footer ── */
+  .footer { padding: 52px 0 24px; text-align: center; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-grid > div { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .footer-desc { max-width: 100%; text-align: center; }
+  .footer-social { margin-top: 20px; justify-content: center; }
+  .footer-grid h4 { text-align: center; width: 100%; }
+  .footer-grid ul { display: flex; flex-direction: column; align-items: center; }
+  .footer-contact-list li, .footer-contact-list a { justify-content: center !important; text-align: center; }
+  .footer-contact-list span { text-align: center !important; }
+  .footer-trust-badges { justify-content: center !important; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: 12px; }
+  .footer-bottom-links { justify-content: center; flex-wrap: wrap; gap: 16px; }
+
+  /* ── Cards ── */
+  .card { border-radius: var(--r-lg); padding: 20px; }
+  .card:hover { transform: translateY(-3px); }
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — SMALL MOBILE ≤480px
+══════════════════════════════════════ */
+@media (max-width: 480px) {
+  :root {
+    --section-py: 44px;
+    --container-px: 14px;
   }
 
-  .hero-search input { padding: 10px 14px; }
-  .hero-search .btn { width: 100%; }
+  /* Hero */
+  .hero-title { font-size: 28px; line-height: 1.2; }
+  .hero-subtitle { font-size: 14px; }
+  .hero-badge { font-size: 11px; }
+  .hero-tag { font-size: 11px; padding: 5px 10px; }
 
   /* Stats */
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
-  .stat-item { padding: 24px 16px; }
-  .stat-num { font-size: 28px; }
+  .stat-num { font-size: 24px; }
 
-  /* Specialties */
-  .specialty-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  .specialty-card { padding: 20px 12px; }
+  /* Specialties — 2 columns */
+  .specialty-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .specialty-card { padding: 16px 8px; }
+  .specialty-icon { font-size: 26px; }
 
-  /* Features */
-  .feature-grid { grid-template-columns: 1fr; gap: 16px; }
+  /* Features — 1 column */
+  .feature-grid { grid-template-columns: 1fr; }
 
-  /* Doctor Cards */
-  .doctors-grid { grid-template-columns: 1fr; }
+  /* Section */
+  .section-title { font-size: 22px; }
+  .section-tag { font-size: 11px; }
+  .section-header { margin-bottom: 28px; }
 
-  /* Section Header */
-  .section-title { font-size: 28px; }
+  /* Buttons */
+  .btn-lg { padding: 13px 22px; font-size: 14px; }
+  .btn { font-size: 13px; padding: 11px 18px; }
 
-  /* Footer */
-  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-  .footer { padding: 56px 0 28px; }
-  .footer-bottom { flex-direction: column; text-align: center; }
-  .footer-bottom-links { justify-content: center; }
+  /* Cards */
+  .card { padding: 18px; border-radius: var(--r-md); }
 
   /* CTA */
-  .cta-section { padding: 48px 24px; border-radius: var(--r-xl); }
+  .cta-section { padding: 36px 16px; }
 
-  /* Dashboard */
-  .dashboard-header { padding: 40px 0; }
+  /* Footer */
+  .footer-grid { gap: 22px; }
+  .footer h4 { margin-bottom: 16px; }
+  .footer-bottom-links { gap: 12px; }
 
-  /* Appointment card */
-  .appointment-card { flex-direction: column; align-items: flex-start; }
+  /* FAQ */
+  .faq-header { padding: 18px 20px; font-size: 14px; }
+  .faq-body { padding: 0 20px 18px; padding-top: 16px; }
 }
 
-/* Small Mobile: ≤480px */
-@media (max-width: 480px) {
-  .specialty-grid { grid-template-columns: repeat(2, 1fr); }
-
+/* ══════════════════════════════════════
+   RESPONSIVE — VERY SMALL ≤360px
+══════════════════════════════════════ */
+@media (max-width: 360px) {
+  :root { --container-px: 12px; }
+  .hero-title { font-size: 26px; }
+  .specialty-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
-
-  .hero-title { font-size: 32px; }
-
-  .btn-lg { padding: 14px 28px; font-size: 14px; }
-
-  .footer-grid { gap: 24px; }
-
-  .section-title { font-size: 26px; }
-
-  .hero-tags .hero-tag { font-size: 11px; padding: 5px 10px; }
+  .nav-logo-text { font-size: 18px; }
+  .nav-logo-icon { width: 34px; height: 34px; font-size: 15px; }
 }

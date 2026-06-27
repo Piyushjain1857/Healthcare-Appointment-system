@@ -63,11 +63,11 @@ const Footer = () => {
           {/* Contact */}
           <div>
             <h4>Contact Us</h4>
-            <ul style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+            <ul className="footer-contact-list" style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               <li>
                 <a href="#" style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
                   <span>📍</span>
-                  <span>123 Health Street, Medical District, New Delhi 110001</span>
+                  <span style={{ textAlign: 'left' }}>123 Health Street, Medical District, New Delhi 110001</span>
                 </a>
               </li>
               <li>
@@ -89,7 +89,7 @@ const Footer = () => {
             </ul>
 
             {/* Trust Badges */}
-            <div style={{ marginTop: '24px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            <div className="footer-trust-badges" style={{ marginTop: '24px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
               {['HIPAA Compliant', 'ISO Certified', 'SSL Secured'].map(b => (
                 <span key={b} style={{
                   background: 'rgba(14,165,233,0.1)',

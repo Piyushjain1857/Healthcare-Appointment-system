@@ -182,7 +182,7 @@ const HomePage = () => {
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: '4px', marginBottom: '16px' }}>
-                    {[1,2,3,4,5].map(s => <span key={s} style={{ color: '#f59e0b', fontSize: '16px' }}>★</span>)}
+                    {[1, 2, 3, 4, 5].map(s => <span key={s} style={{ color: '#f59e0b', fontSize: '16px' }}>★</span>)}
                     <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '12px', marginLeft: '6px', fontFamily: 'Inter, sans-serif' }}>4.9 (243)</span>
                   </div>
                   <div style={{ display: 'flex', gap: '8px' }}>
@@ -276,7 +276,7 @@ const HomePage = () => {
       {/* ── Top Doctors ── */}
       <section style={{ background: 'var(--bg-soft)', padding: 'var(--section-py) 0' }}>
         <div className="container">
-          <div className="flex justify-between items-center mb-8 reveal" style={{ flexWrap: 'wrap', gap: '12px' }}>
+          <div className="flex justify-between items-center mb-8 top-doctors-header" style={{ flexWrap: 'wrap', gap: '12px' }}>
             <div>
               <div className="section-tag" style={{ marginBottom: '12px', display: 'inline-flex' }}>Top Rated</div>
               <h2 className="section-title" style={{ marginBottom: '6px' }}>Meet Our Doctors</h2>
@@ -328,7 +328,7 @@ const HomePage = () => {
           ].map((t, i) => (
             <div key={i} className="card" style={{ padding: '28px' }}>
               <div style={{ display: 'flex', gap: '4px', marginBottom: '16px' }}>
-                {[1,2,3,4,5].map(s => <span key={s} style={{ color: s <= t.rating ? '#f59e0b' : '#e2e8f0', fontSize: '16px' }}>★</span>)}
+                {[1, 2, 3, 4, 5].map(s => <span key={s} style={{ color: s <= t.rating ? '#f59e0b' : '#e2e8f0', fontSize: '16px' }}>★</span>)}
               </div>
               <p style={{ color: 'var(--text-body)', fontSize: '14px', lineHeight: '1.8', marginBottom: '20px', fontFamily: 'Inter, sans-serif', fontStyle: 'italic' }}>
                 "{t.quote}"
@@ -388,7 +388,7 @@ const HomePage = () => {
             <p style={{ color: 'var(--text-muted)', marginBottom: '36px', fontSize: '17px', maxWidth: '520px', margin: '0 auto 36px', fontFamily: 'Inter, sans-serif', lineHeight: '1.7' }}>
               Join 50,000+ patients who trust MediCare+ for their healthcare needs. Sign up free and book your first appointment today.
             </p>
-            <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <div className="cta-btn-row" style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
               <button onClick={() => navigate('/register')} className="btn btn-primary btn-lg">
                 Get Started — It's Free
               </button>

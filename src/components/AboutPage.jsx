@@ -118,12 +118,12 @@ const AboutPage = () => {
 
       {/* Vision + Map */}
       <section className="container section-py">
-        <div className="card" style={{
+        <div className="card about-vision-grid" style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
-          gap: '60px',
+          gap: 'clamp(28px, 4vw, 60px)',
           alignItems: 'center',
-          padding: '60px',
+          padding: 'clamp(24px, 4vw, 60px)',
           background: 'linear-gradient(135deg, rgba(14,165,233,0.03) 0%, rgba(6,182,212,0.03) 100%)',
           border: '1px solid rgba(14,165,233,0.15)',
         }}>
