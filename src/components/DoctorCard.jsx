@@ -1,3 +1,4 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -12,47 +13,117 @@ const DoctorCard = ({ doctor }) => {
   };
 
   return (
-    <div className="card" onClick={() => navigate(`/doctors/${doctor.id}`)} style={{ cursor: 'pointer', padding: '20px' }}>
-      <div style={{ display: 'flex', gap: '15px', alignItems: 'center', marginBottom: '15px' }}>
-        <div style={{ position: 'relative' }}>
-          <img src={doctor.image} alt={doctor.name} style={{ width: '60px', height: '60px', borderRadius: '12px', objectFit: 'cover' }} />
-          {doctor.isOnline && <div style={{ position: 'absolute', bottom: '0', right: '0', width: '12px', height: '12px', background: '#10b981', border: '2px solid white', borderRadius: '50%' }}></div>}
+    <div
+      className="doctor-card"
+      onClick={() => navigate(`/doctors/${doctor.id}`)}
+    >
+      {/* Header */}
+      <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start', marginBottom: '14px' }}>
+        <div style={{ position: 'relative', flexShrink: 0 }}>
+          <img
+            src={doctor.image}
+            alt={doctor.name}
+            style={{
+              width: '64px', height: '64px',
+              borderRadius: '16px',
+              objectFit: 'cover',
+              border: '2px solid var(--border)',
+            }}
+          />
+          {doctor.isOnline && (
+            <div style={{
+              position: 'absolute',
+              bottom: '2px', right: '2px',
+              width: '14px', height: '14px',
+              background: 'var(--success)',
+              border: '2px solid white',
+              borderRadius: '50%',
+              boxShadow: '0 0 0 2px rgba(16,185,129,0.2)',
+            }} />
+          )}
         </div>
-        <div style={{ flex: 1 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
-            <h3 style={{ fontSize: '15px', fontWeight: '800' }}>{doctor.name}</h3>
-            {doctor.isOnline && <span className="badge" style={{ background: '#ecfdf5', color: '#059669', fontSize: '10px' }}>Online</span>}
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
+            <h3 style={{
+              fontSize: '15px',
+              fontWeight: '700',
+              color: 'var(--text-dark)',
+              fontFamily: 'Inter, sans-serif',
+              lineHeight: '1.3',
+            }}>
+              {doctor.name}
+            </h3>
+            {doctor.isOnline && (
+              <span className="badge badge-success" style={{ flexShrink: 0, fontSize: '10px' }}>● Online</span>
+            )}
           </div>
-          <p style={{ color: 'var(--primary)', fontSize: '12px', fontWeight: '700' }}>{doctor.specialty}</p>
-          <p style={{ color: 'var(--text-gray)', fontSize: '11px', marginTop: '2px' }}>{doctor.hospital}</p>
+          <p style={{ color: 'var(--primary)', fontSize: '12px', fontWeight: '700', marginTop: '3px', fontFamily: 'Inter, sans-serif' }}>
+            {doctor.specialty}
+          </p>
+          <p style={{ color: 'var(--text-muted)', fontSize: '11px', marginTop: '2px', fontFamily: 'Inter, sans-serif' }}>
+            🏥 {doctor.hospital}
+          </p>
         </div>
       </div>
 
-      <div style={{ display: 'flex', gap: '4px', marginBottom: '12px' }}>
+      {/* Rating */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '12px' }}>
         {[...Array(5)].map((_, i) => (
-          <span key={i} style={{ color: i < Math.floor(doctor.rating) ? '#f59e0b' : '#e2e8f0', fontSize: '12px' }}>★</span>
+          <span key={i} style={{
+            color: i < Math.floor(doctor.rating) ? '#f59e0b' : '#e2e8f0',
+            fontSize: '13px',
+          }}>★</span>
         ))}
-        <span style={{ fontSize: '11px', color: 'var(--text-gray)', marginLeft: '4px', fontWeight: '700' }}>{doctor.rating} ({doctor.reviews})</span>
+        <span style={{ fontSize: '12px', color: 'var(--text-muted)', marginLeft: '4px', fontWeight: '700', fontFamily: 'Inter, sans-serif' }}>
+          {doctor.rating} ({doctor.reviews} reviews)
+        </span>
       </div>
 
-      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '20px' }}>
-        {doctor.tags?.map(tag => (
-          <span key={tag} className="badge" style={{ background: '#f1f5f9', color: 'var(--text-gray)' }}>{tag}</span>
-        ))}
-      </div>
+      {/* Tags */}
+      {doctor.tags?.length > 0 && (
+        <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '16px' }}>
+          {doctor.tags.slice(0, 3).map(tag => (
+            <span key={tag} className="badge" style={{ background: 'var(--bg-soft)', color: 'var(--text-muted)', fontSize: '10px' }}>
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-color)', paddingTop: '15px' }}>
-        <div style={{ display: 'flex', gap: '15px' }}>
+      {/* Footer */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderTop: '1px solid var(--border)',
+        paddingTop: '14px',
+        gap: '12px',
+      }}>
+        <div style={{ display: 'flex', gap: '16px' }}>
           <div>
-            <div style={{ fontSize: '10px', color: 'var(--text-gray)', fontWeight: '700' }}>EXPERIENCE</div>
-            <div style={{ fontSize: '13px', fontWeight: '800' }}>{doctor.experience} yrs</div>
+            <div style={{ fontSize: '10px', color: 'var(--text-muted)', fontWeight: '700', letterSpacing: '0.5px', fontFamily: 'Inter, sans-serif', textTransform: 'uppercase' }}>
+              Exp
+            </div>
+            <div style={{ fontSize: '14px', fontWeight: '800', color: 'var(--text-dark)', fontFamily: 'Inter, sans-serif' }}>
+              {doctor.experience} yrs
+            </div>
           </div>
           <div>
-            <div style={{ fontSize: '10px', color: 'var(--text-gray)', fontWeight: '700' }}>FEE</div>
-            <div style={{ fontSize: '13px', fontWeight: '800' }}>₹{doctor.fee}</div>
+            <div style={{ fontSize: '10px', color: 'var(--text-muted)', fontWeight: '700', letterSpacing: '0.5px', fontFamily: 'Inter, sans-serif', textTransform: 'uppercase' }}>
+              Fee
+            </div>
+            <div style={{ fontSize: '14px', fontWeight: '800', color: 'var(--primary)', fontFamily: 'Inter, sans-serif' }}>
+              ₹{doctor.fee}
+            </div>
           </div>
         </div>
-        <button onClick={handleBook} className="btn btn-primary" style={{ padding: '8px 16px', fontSize: '12px', borderRadius: '8px' }}>Book Now</button>
+        <button
+          onClick={handleBook}
+          className="btn btn-primary btn-sm"
+          style={{ borderRadius: 'var(--r-md)' }}
+        >
+          Book Now
+        </button>
       </div>
     </div>
   );
